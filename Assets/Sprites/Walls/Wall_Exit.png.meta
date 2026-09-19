@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bc5f08a5cf41c418181484e0262bbe70
+guid: cc92298e7f65d4dab84c767ebf987f45
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2117276017238609337
-    second: Normal_Pellet_0
+      213: -838916659385169848
+    second: Wall_Exit_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Normal_Pellet_0
+      name: Wall_Exit_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 7
-        width: 17
-        height: 17
+        x: 0
+        y: 12
+        width: 32
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9bd06f2e153126d10800000000000000
-      internalID: 2117276017238609337
+      spriteID: 84880393eb19b54f0800000000000000
+      internalID: -838916659385169848
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3d19ce67771364bebb7d01a4e0119ace
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      C: 2117276017238609337
-      Normal_Pellet_0: 2117276017238609337
+      Wall_Exit_0: -838916659385169848
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
