@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class Tweener : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
+    private Tween activeTween;
     // Update is called once per frame
     void Update()
     {
+        if (activeTween != null)
+        {
+            float timeFraction = (Time.time - activeTween.StartTime) / activeTween.Duration;
+
+            if (timeFraction < 1.0f)
+            {
+                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, timeFraction);
+            }
+            else
+            {
+                activeTween.Target.position = activeTween.EndPos;
+                activeTween = null;
+            }
+        }
         
     }
 }
