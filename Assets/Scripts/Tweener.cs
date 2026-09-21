@@ -34,7 +34,7 @@ public class Tweener : MonoBehaviour
         return true;
     }
 
-    public bool isTweening()
+    public bool IsTweening()
     {
         return activeTween != null;
     }

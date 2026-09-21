@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 518196}
   - component: {fileID: 518197}
   - component: {fileID: 518198}
+  - component: {fileID: 518200}
+  - component: {fileID: 518199}
   m_Layer: 0
   m_Name: PacStudent
   m_TagString: Untagged
@@ -233,6 +235,39 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &518199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772203d5a81004687b36c69e56ec7039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PacStudentController
+  speed: 4
+  moveClip: {fileID: 0}
+  moveAudio: {fileID: 0}
+  tweener: {fileID: 0}
+  corners:
+  - {x: 1, y: -1, z: 0}
+  - {x: 6, y: -1, z: 0}
+  - {x: 6, y: -5, z: 0}
+  - {x: 1, y: -5, z: 0}
+--- !u!114 &518200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bb63e55decb42c3b9e904129dac705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tweener
 --- !u!1 &1753551
 GameObject:
   m_ObjectHideFlags: 0
