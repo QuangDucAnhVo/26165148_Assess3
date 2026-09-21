@@ -22,4 +22,20 @@ public class Tweener : MonoBehaviour
         }
         
     }
+
+    public bool AddTween(Transform target, Vector3 startPos, Vector3 endPos, float duration)
+    {
+        if (activeTween != null)
+        {
+            return false;
+        }
+
+        activeTween = new Tween(target, startPos, endPos, Time.time, duration);
+        return true;
+    }
+
+    public bool isTweening()
+    {
+        return activeTween != null;
+    }
 }
