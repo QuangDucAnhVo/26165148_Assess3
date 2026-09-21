@@ -5,7 +5,7 @@ public class PacStudentController : MonoBehaviour
     public float speed;
     public AudioClip moveClip;
     public AudioSource moveAudio;
-    public Tweener tweener;
+    private Tweener tweener;
     private Animator animator;
     public Vector3[] corners;
     private int currentCorner = 0;

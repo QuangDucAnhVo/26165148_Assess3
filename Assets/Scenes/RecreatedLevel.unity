@@ -247,10 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772203d5a81004687b36c69e56ec7039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PacStudentController
-  speed: 4
-  moveClip: {fileID: 0}
-  moveAudio: {fileID: 0}
-  tweener: {fileID: 0}
+  speed: 3
+  moveClip: {fileID: 8300000, guid: 3e3fa32b4e77b4cecbc7e800950fbb3a, type: 3}
+  moveAudio: {fileID: 677653868}
   corners:
   - {x: 1, y: -1, z: 0}
   - {x: 6, y: -1, z: 0}
