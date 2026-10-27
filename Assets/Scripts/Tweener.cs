@@ -3,7 +3,7 @@ using UnityEngine;
 public class Tweener : MonoBehaviour
 {
     private Tween activeTween;
-    // Update is called once per frame
+
     void Update()
     {
         if (activeTween != null)
@@ -25,7 +25,7 @@ public class Tweener : MonoBehaviour
 
     public bool AddTween(Transform target, Vector3 startPos, Vector3 endPos, float duration)
     {
-        if (activeTween != null)
+        if (IsTweening())
         {
             return false;
         }
@@ -36,6 +36,6 @@ public class Tweener : MonoBehaviour
 
     public bool IsTweening()
     {
-        return activeTween != null;
+        return activeTween != null && Time.time - activeTween.StartTime < activeTween.Duration;
     }
 }
