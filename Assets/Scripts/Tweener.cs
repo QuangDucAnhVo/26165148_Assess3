@@ -36,6 +36,6 @@ public class Tweener : MonoBehaviour
 
     public bool IsTweening()
     {
-        return activeTween != null && Time.time - activeTween.StartTime > activeTween.Duration;
+        return activeTween != null && Time.time - activeTween.StartTime < activeTween.Duration;
     }
 }
