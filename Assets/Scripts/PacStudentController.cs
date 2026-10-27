@@ -16,6 +16,7 @@ public class PacStudentController : MonoBehaviour
     
     private int row = 1;
     private int col = 1;
+    private bool isMoving = false;
  
     void Start()
     {
@@ -127,7 +128,7 @@ public class PacStudentController : MonoBehaviour
         {
             clip = eatClip;
         }
-        if (moveAudio.clip != clip || !moveAudio.isPlaying)
+        if (!isMoving || moveAudio.clip != clip)
         {
             moveAudio.clip = clip;
             moveAudio.Play();
@@ -136,11 +137,16 @@ public class PacStudentController : MonoBehaviour
         {
             dust.Play();
         }
+        isMoving = true;
     }
     void StopMoving()
     {
-        animator.speed = 0f;
-        moveAudio.Stop();
-        dust.Stop();
+        if (isMoving)
+        {
+            animator.speed = 0f;
+            moveAudio.Stop();
+            dust.Stop();
+            isMoving = false;
+        }
     }
 }

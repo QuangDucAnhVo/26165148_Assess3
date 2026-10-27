@@ -21,15 +21,14 @@ public class LevelGrid : MonoBehaviour
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
     };
     
+    private int quarterRows = 15; 
+    private int quarterCols = 14;   
+    private int rows = 29;          
+    private int cols = 28;   
     private int[,] map;
  
     void Awake()
     {
-        int quarterRows = levelMap.GetLength(0); 
-        int quarterCols = levelMap.GetLength(1);   
-        int rows = quarterRows * 2 - 1;          
-        int cols = quarterCols * 2;            
- 
         map = new int[rows, cols];
         for (int r = 0; r < rows; r++)
         {
