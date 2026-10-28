@@ -56,7 +56,6 @@ public class BorderDots : MonoBehaviour
             return new Vector2(right - distance, bottom); 
         }
         distance -= width;
-
         return new Vector2(left, bottom + distance); 
     }
 }
