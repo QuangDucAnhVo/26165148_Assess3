@@ -7665,6 +7665,7 @@ GameObject:
   - component: {fileID: 161900462}
   - component: {fileID: 161900461}
   - component: {fileID: 161900463}
+  - component: {fileID: 161900464}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Ghost
@@ -7845,6 +7846,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostController
   state: 0
+  ghostNumber: 1
+  levelGrid: {fileID: 2067134740}
+  pacStudent: {fileID: 518202}
+  gameManager: {fileID: 1414361811}
+--- !u!114 &161900464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161900457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bb63e55decb42c3b9e904129dac705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tweener
 --- !u!1 &162793894
 GameObject:
   m_ObjectHideFlags: 0
@@ -33431,6 +33448,7 @@ GameObject:
   - component: {fileID: 726270062}
   - component: {fileID: 726270061}
   - component: {fileID: 726270063}
+  - component: {fileID: 726270064}
   m_Layer: 0
   m_Name: Grey
   m_TagString: Ghost
@@ -33611,6 +33629,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostController
   state: 0
+  ghostNumber: 2
+  levelGrid: {fileID: 2067134740}
+  pacStudent: {fileID: 518202}
+  gameManager: {fileID: 1414361811}
+--- !u!114 &726270064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726270057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bb63e55decb42c3b9e904129dac705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tweener
 --- !u!1 &727921999
 GameObject:
   m_ObjectHideFlags: 0
@@ -35960,6 +35994,7 @@ GameObject:
   - component: {fileID: 795551203}
   - component: {fileID: 795551202}
   - component: {fileID: 795551204}
+  - component: {fileID: 795551205}
   m_Layer: 0
   m_Name: Purple
   m_TagString: Ghost
@@ -36140,6 +36175,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostController
   state: 0
+  ghostNumber: 4
+  levelGrid: {fileID: 2067134740}
+  pacStudent: {fileID: 518202}
+  gameManager: {fileID: 1414361811}
+--- !u!114 &795551205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795551198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bb63e55decb42c3b9e904129dac705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tweener
 --- !u!1 &797412856
 GameObject:
   m_ObjectHideFlags: 0
@@ -46439,6 +46490,7 @@ GameObject:
   - component: {fileID: 977843376}
   - component: {fileID: 977843375}
   - component: {fileID: 977843377}
+  - component: {fileID: 977843378}
   m_Layer: 0
   m_Name: Green
   m_TagString: Ghost
@@ -46619,6 +46671,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostController
   state: 0
+  ghostNumber: 3
+  levelGrid: {fileID: 2067134740}
+  pacStudent: {fileID: 518202}
+  gameManager: {fileID: 1414361811}
+--- !u!114 &977843378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977843371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bb63e55decb42c3b9e904129dac705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tweener
 --- !u!1 &982808287
 GameObject:
   m_ObjectHideFlags: 0
