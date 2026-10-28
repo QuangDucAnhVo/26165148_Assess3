@@ -1033,8 +1033,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartSceneManager
   level1Button: {fileID: 1936911849}
-  level1ScoreText: {fileID: 0}
-  level1TimeText: {fileID: 0}
+  level1ScoreText: {fileID: 370326926}
+  level1TimeText: {fileID: 1860786490}
 --- !u!4 &1614237822
 Transform:
   m_ObjectHideFlags: 0
