@@ -111,7 +111,6 @@ public class GameManager : MonoBehaviour
             PlaySFX(ghostEatClip);
             AddScore(300);
             UpdateMusic();
-            StartCoroutine(ReviveGhost(ghost));
         }
     }
     public void GhostRevived(GhostController ghost)
@@ -162,32 +161,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator ReviveGhost(GhostController ghost)
-    {
-        yield return new WaitForSeconds(3f);
-        if (ghost.state == GhostController.GhostState.Dead)
-        {
-            if (scaredTimer <= 0f)
-            {
-                ghost.SetState(GhostController.GhostState.Normal);
-            }
-            else if (scaredTimer <= 3f)
-            {
-                ghost.SetState(GhostController.GhostState.Recovering);
-            }
-            else
-            {
-                ghost.SetState(GhostController.GhostState.Scared);
-            }
-            UpdateMusic();
-        }
-    }
     IEnumerator PacStudentDies()
     {
         gameState = GameState.Dying;
         lives--;
         hud.SetLives(lives);
         pacStudent.Die();
+        FreezeGhost();
         StopMusic();
         PlaySFX(deathClip);
         
@@ -223,6 +203,7 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.GameOver;
         pacStudent.Freeze();
+        FreezeGhost();
         StopMusic();
         hud.ShowMessage("Game Over");
         hud.DisableButtons();

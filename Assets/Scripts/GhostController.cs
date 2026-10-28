@@ -30,7 +30,7 @@ public class GhostController : MonoBehaviour
     private int[] colStep = { 0, 1, 0, -1 };
     private int[] oppositeStep = { 2, 3, 0, 1 };
     private string[] directions = { "Up", "Right", "Down", "Left" };
-    
+
     private int[] cornerRows = { 1, 1, 5, 5, 1, 1, 8, 8, 20, 20, 27, 27, 23, 23, 27, 27, 20, 20, 8, 8 };
     private int[] cornerCols = { 1, 12, 12, 15, 15, 26, 26, 21, 21, 26, 26, 15, 15, 12, 12, 1, 1, 6, 6, 1 };
     private int cornerIndex = 12;
@@ -58,13 +58,11 @@ public class GhostController : MonoBehaviour
         {
             return;
         }
-
         if (!tweener.IsTweening())
         {
             Decide();
         }
     }
-
     void Decide()
     {
         if (state == GhostState.Dead)
@@ -76,7 +74,6 @@ public class GhostController : MonoBehaviour
             }
             gameManager.GhostRevived(this);
         }
-
         int dir;
         if (levelGrid.IsInSpawnArea(row, col))
         {
@@ -99,219 +96,212 @@ public class GhostController : MonoBehaviour
             else dir = ClockwiseAroundMap();
         }
         else
-            {
-                dir = AwayFromPacStudent();
-            }
-            Movement(dir);
-        }
-
-        void Movement(int dir)
         {
-            int nextRow = row + rowStep[dir];
-            int nextCol = col + colStep[dir];
-            Vector3 startPos = levelGrid.GridToWorld(row, col);
-            Vector3 endPos = levelGrid.GridToWorld(nextRow, nextCol);
-            tweener.AddTween(transform, startPos, endPos, 1f / CurrentSpeed());
-
-            row = nextRow;
-            col = nextCol;
-            direction = dir;
-            PlayAnimation();
+            dir = AwayFromPacStudent();
         }
+        Movement(dir);
+    }
 
-        void BackToSpawn()
+    void Movement(int dir)
+    {
+        int nextRow = row + rowStep[dir];
+        int nextCol = col + colStep[dir];
+        Vector3 startPos = levelGrid.GridToWorld(row, col);
+        Vector3 endPos = levelGrid.GridToWorld(nextRow, nextCol);
+        tweener.AddTween(transform, startPos, endPos, 1f / CurrentSpeed());
+
+        row = nextRow;
+        col = nextCol;
+        direction = dir;
+        PlayAnimation();
+    }
+
+    void BackToSpawn()
+    {
+        float distance = (startPosition - transform.position).magnitude;
+        tweener.AddTween(transform, transform.position, startPosition, distance / SlowSpeed());
+
+        row = startRow;
+        col = startCol;
+        direction = -1;
+        cornerIndex = 12;
+    }
+
+    float CurrentSpeed()
+    {
+        if (state == GhostState.Normal)
         {
-            float distance = (startPosition - transform.position).magnitude;
-            tweener.AddTween(transform, transform.position, startPosition, distance / SlowSpeed());
-
-            row = startRow;
-            col = startCol;
-            direction = -1;
+            return pacStudent.speed * 0.9f;
         }
+        return SlowSpeed();
+    }
 
-        float CurrentSpeed()
+    float SlowSpeed()
+    {
+        return pacStudent.speed * 0.9f * 0.5f;
+    }
+
+    int ExitDirection()
+    {
+        int gapCol = 13;
+        if (col >= 14)
         {
-            if (state == GhostState.Normal)
-            {
-                return pacStudent.speed * 0.9f;
-            }
-
-            return SlowSpeed();
+            gapCol = 14;
         }
-
-        float SlowSpeed()
+        if (col < gapCol)
         {
-            return pacStudent.speed * 0.9f * 0.5f;
+            return 1;
         }
-
-        int ExitDirection()
+        if (col > gapCol)
         {
-            int gapCol = 13;
-            if (col >= 14)
-            {
-                gapCol = 14;
-            }
-
-            if (col < gapCol)
-            {
-                return 1;
-            }
-
-            if (col > gapCol)
-            {
-                return 3;
-            }
-
-            if (ghostNumber == 1 || ghostNumber == 3)
-            {
-                return 0;
-            }
-
-            return 2;
+            return 3;
         }
-
-        List<int> ValidDirections()
+        if (ghostNumber == 1 || ghostNumber == 3)
         {
-            List<int> valid = new List<int>();
-            for (int dir = 0; dir < 4; dir++)
-            {
-                bool isBackstep = direction != -1 && dir == oppositeStep[direction];
-                if (!isBackstep && levelGrid.IsWalkable(row + rowStep[dir], col + colStep[dir]))
-                {
-                    valid.Add(dir);
-                }
-            }
-
-            if (valid.Count == 0 && direction != -1)
-            {
-                valid.Add(oppositeStep[direction]);
-            }
-
-            return valid;
+            return 0;
         }
+        return 2;
+    }
 
-        int AwayFromPacStudent()
+    List<int> ValidDirections()
+    {
+        List<int> valid = new List<int>();
+        for (int dir = 0; dir < 4; dir++)
         {
-            List<int> valid = ValidDirections();
-            float currentDistance = DistanceToPacStudent(row, col);
-
-            List<int> away = new List<int>();
-            for (int i = 0; i < valid.Count; i++)
+            bool isBackstep = direction != -1 && dir == oppositeStep[direction];
+            if (!isBackstep && levelGrid.IsWalkable(row + rowStep[dir], col + colStep[dir]))
             {
-                int dir = valid[i];
-                if (DistanceToPacStudent(row + rowStep[dir], col + colStep[dir]) >= currentDistance)
-                {
-                    away.Add(dir);
-                }
+                valid.Add(dir);
             }
-            if (away.Count > 0)
-            {
-                return RandomFrom(away);
-            }
-            return RandomFrom(valid);
         }
-        int TowardsPacStudent()
+        if (valid.Count == 0 && direction != -1)
         {
-            List<int> valid = ValidDirections();
-            float currentDistance = DistanceToPacStudent(row, col);
- 
-            List<int> closer = new List<int>();
-            for (int i = 0; i < valid.Count; i++)
-            {
-                int dir = valid[i];
-                if (DistanceToPacStudent(row + rowStep[dir], col + colStep[dir]) <= currentDistance)
-                {
-                    closer.Add(dir);
-                }
-            }
-            if (closer.Count > 0)
-            {
-                return RandomFrom(closer);
-            }
-            return RandomFrom(valid);
+            valid.Add(oppositeStep[direction]);
         }
+        return valid;
+    }
 
-        int RandomDirection()
+    int AwayFromPacStudent()
+    {
+        List<int> valid = ValidDirections();
+        float currentDistance = DistanceToPacStudent(row, col);
+
+        List<int> away = new List<int>();
+        for (int i = 0; i < valid.Count; i++)
         {
-            return RandomFrom(ValidDirections());
-        }
-        int ClockwiseAroundMap()
-        {
-            if ((row == cornerRows[cornerIndex] && col == cornerCols[cornerIndex]) || stepsToCorner > 20)
+            int dir = valid[i];
+            if (DistanceToPacStudent(row + rowStep[dir], col + colStep[dir]) >= currentDistance)
             {
-                cornerIndex = (cornerIndex + 1) % cornerRows.Length;
-                stepsToCorner = 0;
+                away.Add(dir);
             }
-            stepsToCorner++;
+        }
+        if (away.Count > 0)
+        {
+            return RandomFrom(away);
+        }
+        return RandomFrom(valid);
+    }
+    int TowardsPacStudent()
+    {
+        List<int> valid = ValidDirections();
+        float currentDistance = DistanceToPacStudent(row, col);
 
-            Vector3 corner = levelGrid.GridToWorld(cornerRows[cornerIndex], cornerCols[cornerIndex]);
-            List<int> valid = ValidDirections();
-            int bestDir = valid[0];
-            float bestDistance = 1000f;
-            for (int i = 0; i < valid.Count; i++)
+        List<int> closer = new List<int>();
+        for (int i = 0; i < valid.Count; i++)
+        {
+            int dir = valid[i];
+            if (DistanceToPacStudent(row + rowStep[dir], col + colStep[dir]) <= currentDistance)
             {
-                int dir = valid[i];
-                float distance = (levelGrid.GridToWorld(row + rowStep[dir], col + colStep[dir]) - corner).magnitude;
-                if (distance < bestDistance)
-                {
-                    bestDistance = distance;
-                    bestDir = dir;
-                }
+                closer.Add(dir);
             }
-            return bestDir;
         }
+        if (closer.Count > 0)
+        {
+            return RandomFrom(closer);
+        }
+        return RandomFrom(valid);
+    }
 
-        float DistanceToPacStudent(int r, int c)
+    int RandomDirection()
+    {
+        return RandomFrom(ValidDirections());
+    }
+    int ClockwiseAroundMap()
+    {
+        if ((row == cornerRows[cornerIndex] && col == cornerCols[cornerIndex]) || stepsToCorner > 20)
         {
-            return (levelGrid.GridToWorld(r, c) - pacStudent.transform.position).magnitude;
+            cornerIndex = (cornerIndex + 1) % cornerRows.Length;
+            stepsToCorner = 0;
         }
+        stepsToCorner++;
 
-        int RandomFrom(List<int> options)
+        Vector3 corner = levelGrid.GridToWorld(cornerRows[cornerIndex], cornerCols[cornerIndex]);
+        List<int> valid = ValidDirections();
+        int bestDir = valid[0];
+        float bestDistance = 1000f;
+        for (int i = 0; i < valid.Count; i++)
         {
-            return options[Random.Range(0, options.Count)];
-        }
-        void PlayAnimation()
-        {
-            string facing = "Down";
-            if (direction != -1)
+            int dir = valid[i];
+            float distance = (levelGrid.GridToWorld(row + rowStep[dir], col + colStep[dir]) - corner).magnitude;
+            if (distance < bestDistance)
             {
-                facing = directions[direction];
+                bestDistance = distance;
+                bestDir = dir;
             }
-
-            if (state == GhostState.Normal)
-            {
-                animator.Play("Normal_" + facing);
-            }
-            else if (state == GhostState.Scared)
-            {
-                animator.Play("Scared_" + facing);
-            }
-            else if (state == GhostState.Recovering)
-            {
-                animator.Play("Recovering");
-            }
-            else animator.Play("Ghost_Dead");
-            }
-
-        public void SetState(GhostState newState)
-        {
-            state = newState;
-            PlayAnimation();
         }
+        return bestDir;
+    }
 
-        public void Freeze()
-        {
-            tweener.StopTween();
-        }
+    float DistanceToPacStudent(int r, int c)
+    {
+        return (levelGrid.GridToWorld(r, c) - pacStudent.transform.position).magnitude;
+    }
 
-        public void GhostReset()
+    int RandomFrom(List<int> options)
+    {
+        return options[Random.Range(0, options.Count)];
+    }
+    void PlayAnimation()
+    {
+        string facing = "Down";
+        if (direction != -1)
         {
-            tweener.StopTween();
-            transform.position = startPosition;
-            row = startRow;
-            col = startCol;
-            direction = -1;
-            cornerIndex = 12;
-            SetState(GhostState.Normal);
+            facing = directions[direction];
         }
-} 
+        if (state == GhostState.Normal)
+        {
+            animator.Play("Normal_" + facing);
+        }
+        else if (state == GhostState.Scared)
+        {
+            animator.Play("Scared_" + facing);
+        }
+        else if (state == GhostState.Recovering)
+        {
+            animator.Play("Recovering");
+        }
+        else animator.Play("Ghost_Dead");
+    }
+
+    public void SetState(GhostState newState)
+    {
+        state = newState;
+        PlayAnimation();
+    }
+
+    public void Freeze()
+    {
+        tweener.StopTween();
+    }
+
+    public void GhostReset()
+    {
+        tweener.StopTween();
+        transform.position = startPosition;
+        row = startRow;
+        col = startCol;
+        direction = -1;
+        cornerIndex = 12;
+        SetState(GhostState.Normal);
+    }
+}
