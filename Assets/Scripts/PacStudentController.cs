@@ -1,4 +1,3 @@
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class PacStudentController : MonoBehaviour
@@ -236,6 +235,7 @@ public class PacStudentController : MonoBehaviour
     }
     public void Die()
     {
+        tweener.StopTween();
         StopMoving();
         pacCollider.enabled = false;
         animator.speed = 1f;
