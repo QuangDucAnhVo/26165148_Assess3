@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
                 ghosts[i].SetState(GhostController.GhostState.Scared);
             }
         }
- 
         hud.ShowGhostTimer(scaredTimer);
         UpdateMusic();
         CheckAllPelletsEaten();
@@ -115,10 +114,25 @@ public class GameManager : MonoBehaviour
             StartCoroutine(ReviveGhost(ghost));
         }
     }
+    public void GhostRevived(GhostController ghost)
+    {
+        if (scaredTimer <= 0f)
+        {
+            ghost.SetState(GhostController.GhostState.Normal);
+        }
+        else if (scaredTimer <= 3f)
+        {
+            ghost.SetState(GhostController.GhostState.Recovering);
+        }
+        else
+        {
+            ghost.SetState(GhostController.GhostState.Scared);
+        }
+        UpdateMusic();
+    }
     void UpdateScaredTimer()
     {
         scaredTimer -= Time.deltaTime;
- 
         if (scaredTimer <= 0f)
         {
             scaredTimer = 0f;
