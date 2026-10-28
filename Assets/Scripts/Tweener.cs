@@ -22,7 +22,6 @@ public class Tweener : MonoBehaviour
         }
         
     }
-
     public bool AddTween(Transform target, Vector3 startPos, Vector3 endPos, float duration)
     {
         if (IsTweening())
@@ -33,7 +32,10 @@ public class Tweener : MonoBehaviour
         activeTween = new Tween(target, startPos, endPos, Time.time, duration);
         return true;
     }
-
+    public void StopTween()
+    {
+        activeTween = null;
+    }
     public bool IsTweening()
     {
         return activeTween != null && Time.time - activeTween.StartTime < activeTween.Duration;

@@ -93,4 +93,9 @@ public class LevelGrid : MonoBehaviour
     {
         return pelletsLeft;
     }
+
+    public bool IsInSpawnArea(int row, int col)
+    {
+        return row >= 12 && row <= 16 && col >= 11 && col <= 16;
+    }
 }
