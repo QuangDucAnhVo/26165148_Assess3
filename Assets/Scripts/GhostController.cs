@@ -208,6 +208,31 @@ public class GhostController : MonoBehaviour
 
             return RandomFrom(valid);
         }
+        int TowardsPacStudent()
+        {
+            List<int> valid = ValidDirections();
+            float currentDistance = DistanceToPacStudent(row, col);
+ 
+            List<int> closer = new List<int>();
+            for (int i = 0; i < valid.Count; i++)
+            {
+                int dir = valid[i];
+                if (DistanceToPacStudent(row + rowStep[dir], col + colStep[dir]) <= currentDistance)
+                {
+                    closer.Add(dir);
+                }
+            }
+            if (closer.Count > 0)
+            {
+                return RandomFrom(closer);
+            }
+            return RandomFrom(valid);
+        }
+
+        int RandomDirection()
+        {
+            return RandomFrom(ValidDirections());
+        }
 
         float DistanceToPacStudent(int r, int c)
         {
