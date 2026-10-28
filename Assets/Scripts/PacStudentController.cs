@@ -254,6 +254,7 @@ public class PacStudentController : MonoBehaviour
     }
     public void Freeze()
     {
+        tweener.StopTween();
         StopMoving();
         pacCollider.enabled = false;
     }

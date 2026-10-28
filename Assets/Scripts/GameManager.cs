@@ -266,6 +266,14 @@ public class GameManager : MonoBehaviour
             PlayMusic(clip, true);
         }
     }
+
+    void FreezeGhost()
+    {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            ghosts[i].Freeze();
+        }
+    }
     bool AnyGhostDead()
     {
         for (int i = 0; i < ghosts.Length; i++)
